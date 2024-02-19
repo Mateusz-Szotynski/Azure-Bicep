@@ -11,7 +11,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' ={
   kind: 'StorageV2'
   properties:{
     accessTier: 'Hot'
-    allowBlobPublicAccess: false
+    allowBlobPublicAccess: true
     supportsHttpsTrafficOnly: true
   }
 }
@@ -29,8 +29,14 @@ resource storageService 'Microsoft.Storage/storageAccounts/blobServices@2023-01-
     lastAccessTimeTrackingPolicy: {
       enable: true
     }
+     deleteRetentionPolicy: {
+      enabled: true
+      days: 7
+      allowPermanentDelete: false
+     }
     restorePolicy: {
       enabled: true
+      days: 3
     }
   }
 }
